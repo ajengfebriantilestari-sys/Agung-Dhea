@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agung & Dhea</title>
+
+  <meta name="description" content="Agung & Dhea">
+  <meta name="keywords" content="Agung & Dhea, wedding invitation, undangan pernikahan">
+  <meta name="author" content="Invitation">
+
+  <!-- ✅ Open Graph (untuk WhatsApp, Instagram, Facebook) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:site_name" content="Agung & Dhea">
+  <meta property="og:title" content="Agung & Dhea">
+  <meta property="og:description" content="The Wedding Of.">
+  <meta property="og:image" content="https://unique-yeot-0bd537.netlify.app/image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://unique-yeot-0bd537.netlify.app/">
+
+  <!-- ✅ Twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Agung & Dhea">
+  <meta name="twitter:description" content="Agung & Dhea.">
+  <meta name="twitter:image" content="https://unique-yeot-0bd537.netlify.app/image.jpg">
+
+  <link rel="canonical" href="https://unique-yeot-0bd537.netlify.app/">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Glacial+Indifference&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --text-top: 57.5%;
+      --text-left: 50%;
+      --button-bottom: 19%;
+      --button-left: 50%;
+      --primary-color: #8d0;
+      --secondary-color: #f2eee9;
+      --text-color: #000;
+      --font-primary: 'Glacial Indifference', sans-serif;
+      --flower-bottom: 0px;
+      --flower-left: 0px;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: var(--secondary-color);
+      font-family: var(--font-primary);
+      overflow: hidden;
+    }
+
+    #cover-page {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url('cover.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: 1000;
+      transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    }
+
+    .cover-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .text-overlay {
+      position: absolute;
+      top: var(--text-top);
+      left: var(--text-left);
+      transform: translate(-50%, -50%);
+      color: var(--text-color);
+      font-size: 15px;
+      font-weight: bold;
+      text-transform: capitalize;
+      text-align: center;
+      background: 0;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+
+    /* ✨ Tulisan "click here!" */
+    .click-here {
+      position: absolute;
+      top: 14%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #62201E;
+      font-size: 38px;
+      text-transform: none;
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      background: none;
+      border: none;
+      letter-spacing: 1px;
+      z-index: 1002;
+      transition: opacity 0.3s ease;
+    }
+
+    .click-here:hover {
+      opacity: 0.7;
+    }
+
+    /* 🌸 Animasi bunga kiri bawah */
+    .flower {
+      position: absolute;
+      bottom: var(--flower-bottom);
+      left: var(--flower-left);
+      width: 200px;
+      animation: gerakKananKiri 3s ease-in-out infinite alternate;
+      z-index: 1001;
+    }
+
+    @keyframes gerakKananKiri {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(20px); }
+    }
+
+    @media (max-width: 480px) {
+      .text-overlay { font-size: 17px; }
+      .click-here { font-size: 38px; }
+      .flower { width: 380px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Musik -->
+  <audio id="audioPlayer" loop preload="auto">
+    <source src="musik.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung elemen audio.
+  </audio>
+
+  <!-- Cover -->
+  <div id="cover-page">
+    <div class="cover-content">
+      <div class="text-overlay" id="guestName"></div>
+
+      <!-- 🌸 Elemen bunga -->
+      <img src="bunga.png" alt="Bunga" class="flower">
+
+      <!-- ✨ Teks Click Here -->
+      <div id="openText" class="click-here">click here!</div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const guestNameParam = params.get('to');
+      const guestName = document.getElementById('guestName');
+      const openText = document.getElementById('openText');
+      const audio = document.getElementById('audioPlayer');
+      const cover = document.getElementById('cover-page');
+
+      if (guestNameParam) {
+        guestName.textContent = decodeURIComponent(guestNameParam.replace(/\+/g, ' '));
+      }
+
+      openText.addEventListener('click', () => {
+        audio.play().catch(err => console.warn("Autoplay gagal:", err));
+        cover.style.opacity = '0';
+        cover.style.visibility = 'hidden';
+
+        const canvaURL = "https://ourlatestmemoriess.my.canva.site/";
+        const link = document.createElement('a');
+        link.href = canvaURL;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    });
+  </script>
+
+</body>
+</html>
